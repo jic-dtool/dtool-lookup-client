@@ -1,7 +1,13 @@
 """dtool_lookup_client package."""
 
 import click
+import json
 import requests
+
+import dtoolcore
+import dtoolcore.utils
+
+from dtool_cli.cli import dataset_uri_argument
 
 __version__ = "0.1.0"
 
@@ -33,3 +39,25 @@ def lookup(uuid, server):
     r = requests.get(url)
     for uri in uris_from_lookup_response(r):
         click.secho(uri)
+
+
+@click.command()
+@dataset_uri_argument
+@click.option(
+    "-s",
+    "--server",
+    default="http://localhost:5000",
+    help="Specify the lookup server")
+def register(dataset_uri, server):
+    """Return the URIs associated with a UUID in the lookup server."""
+    url = urljoin(server, "register_dataset")
+    r = requests.get(url)
+
+    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
+
+    dataset_info = dataset._admin_metadata
+    dataset_info["uri"] = dataset.uri
+
+    headers = {'content-type': 'application/json'}
+    r = requests.post(url, headers=headers, data=json.dumps(dataset_info))
+    click.secho(r.text)
