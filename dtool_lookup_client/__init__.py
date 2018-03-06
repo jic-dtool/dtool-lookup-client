@@ -61,3 +61,20 @@ def register(dataset_uri, server):
     headers = {'content-type': 'application/json'}
     r = requests.post(url, headers=headers, data=json.dumps(dataset_info))
     click.secho(r.text)
+
+
+@click.command()
+@click.argument("query", default="{}")
+@click.option(
+    "-s",
+    "--server",
+    default="http://localhost:5000",
+    help="Specify the lookup server")
+def search(query, server):
+    """Return the URIs associated with a UUID in the lookup server."""
+    url = urljoin(server, "search_for_datasets")
+
+    headers = {'content-type': 'application/json'}
+    r = requests.get(url)
+    r = requests.post(url, headers=headers, data=query)
+    click.secho(r.text)

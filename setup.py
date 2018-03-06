@@ -23,6 +23,7 @@ setup(
         "dtool.cli": [
             "lookup=dtool_lookup_client:lookup",
             "register=dtool_lookup_client:register",
+            "search=dtool_lookup_client:search",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),
