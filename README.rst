@@ -34,10 +34,10 @@ To list all registered datasets::
 
     dtool search
 
-To list all datasets created by user ``olssont``::
-
-    dtool search '{"creator_username": "olssont"}'
-
 Full text search for the word "EMS"::
 
-    dtool search '{"$text": {"$search": "EMS"}}'
+    dtool search EMS
+
+To list all datasets created by user ``olssont`` using the mongo query language::
+
+    dtool search -m '{"creator_username": "olssont"}'

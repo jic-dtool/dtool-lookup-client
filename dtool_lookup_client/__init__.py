@@ -18,6 +18,7 @@ __version__ = "0.1.0"
 # Ideally the code below should be in separate modules.
 from dtool_cli.cli import dataset_uri_argument
 
+
 def json_serial(obj):
     if isinstance(obj, (datetime, date)):
         return obj.isoformat()
@@ -81,15 +82,22 @@ def register(dataset_uri, server):
 
 
 @click.command()
-@click.argument("query", default="{}")
+@click.argument("query", default="")
+@click.option("-m", "--mongosyntax", default=False, is_flag=True)
 @click.option(
     "-s",
     "--server",
     default="http://localhost:5000",
     help="Specify the lookup server")
-def search(query, server):
+def search(query, mongosyntax, server):
     """Return the URIs associated with a UUID in the lookup server."""
     url = urljoin(server, "search_for_datasets")
+
+    if not mongosyntax:
+        if query == "":
+            query = "{}"
+        else:
+            query = '{"$text": {"$search": "' + query + '"}}'
 
     headers = {'content-type': 'application/json'}
     r = requests.get(url)
