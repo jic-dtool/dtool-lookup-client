@@ -11,10 +11,12 @@ import yaml
 import dtoolcore
 import dtoolcore.utils
 
-from dtool_cli.cli import dataset_uri_argument
 
 __version__ = "0.1.0"
 
+# This needs to be below __version__ to prevent issues with import ordering.
+# Ideally the code below should be in separate modules.
+from dtool_cli.cli import dataset_uri_argument
 
 def json_serial(obj):
     if isinstance(obj, (datetime, date)):
