@@ -18,6 +18,7 @@ setup(
         "click",
         "requests",
         "dtool_cli>=0.6.0",
+        "pyyaml",
     ],
     entry_points={
         "dtool.cli": [

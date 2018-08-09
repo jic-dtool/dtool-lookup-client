@@ -4,12 +4,22 @@ import click
 import json
 import requests
 
+from datetime import date, datetime
+
+import yaml
+
 import dtoolcore
 import dtoolcore.utils
 
 from dtool_cli.cli import dataset_uri_argument
 
 __version__ = "0.1.0"
+
+
+def json_serial(obj):
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    raise TypeError("Type {} not serializable".format(type(obj)))
 
 
 def uris_from_lookup_response(response):
@@ -58,8 +68,13 @@ def register(dataset_uri, server):
     dataset_info = dataset._admin_metadata
     dataset_info["uri"] = dataset.uri
 
+    # Add the readme info.
+    readme_info = yaml.load(dataset.get_readme_content())
+    dataset_info["readme"] = readme_info
+
     headers = {'content-type': 'application/json'}
-    r = requests.post(url, headers=headers, data=json.dumps(dataset_info))
+    data = json.dumps(dataset_info, default=json_serial)
+    r = requests.post(url, headers=headers, data=data)
     click.secho(r.text)
 
 
