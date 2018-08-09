@@ -13,6 +13,9 @@ To install the dtool_lookup_client package.
     cd dtool_lookup_client
     python setup.py install
 
+This plugin depends on having a `dtool-lookup-server
+<https://github.com/jic-dtool/dtool-lookup-server>`_ to talk to.
+
 Registering datasets
 --------------------
 
