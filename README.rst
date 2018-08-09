@@ -9,3 +9,7 @@ To install the dtool_lookup_client package.
 
     cd dtool_lookup_client
     python setup.py install
+
+Full text search for the word "EMS"::
+
+    dtool search '{"$text": {"$search": "EMS"}}'
