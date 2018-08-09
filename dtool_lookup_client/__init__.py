@@ -8,6 +8,10 @@ from datetime import date, datetime
 
 import yaml
 
+import pygments
+import pygments.lexers
+import pygments.formatters
+
 import dtoolcore
 import dtoolcore.utils
 
@@ -102,4 +106,11 @@ def search(query, mongosyntax, server):
     headers = {'content-type': 'application/json'}
     r = requests.get(url)
     r = requests.post(url, headers=headers, data=query)
-    click.secho(r.text)
+
+    formatted_json = json.dumps(json.loads(r.text), indent=2)
+    colorful_json = pygments.highlight(
+        formatted_json,
+        pygments.lexers.JsonLexer(),
+        pygments.formatters.TerminalFormatter())
+
+    click.secho(colorful_json, nl=False)

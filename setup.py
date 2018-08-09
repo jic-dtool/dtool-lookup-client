@@ -19,6 +19,7 @@ setup(
         "requests",
         "dtool_cli>=0.6.0",
         "pyyaml",
+        "pygments",
     ],
     entry_points={
         "dtool.cli": [
