@@ -6,4 +6,5 @@
 .eggs
 .tox
 .cache
+.pytest_cache
 env
