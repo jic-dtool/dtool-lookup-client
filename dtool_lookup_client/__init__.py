@@ -6,8 +6,6 @@ import requests
 
 from datetime import date, datetime
 
-import yaml
-
 import pygments
 import pygments.lexers
 import pygments.formatters
@@ -23,10 +21,6 @@ DTOOL_LOOKUP_SERVER_TOKEN_KEY = "DTOOL_LOOKUP_SERVER_TOKEN"
 
 
 __version__ = "0.1.0"
-
-# This needs to be below __version__ to prevent issues with import ordering.
-# Ideally the code below should be in separate modules.
-from dtool_cli.cli import dataset_uri_argument
 
 
 def json_serial(obj):
@@ -52,7 +46,6 @@ def urljoin(*args):
 def _get_authorisation_header_value():
     token = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_TOKEN_KEY)
     return "Bearer {}".format(token)
-
 
 
 @click.command()
@@ -112,7 +105,7 @@ def lookup_server():
 @lookup_server.command()
 @click.argument("dtool_lookup_server_url", required=False)
 def url(dtool_lookup_server_url):
-    """Display / set / update the dtool lookup server URL."""
+    """Display / set / update URL for dtool lookup server."""
     if dtool_lookup_server_url is None:
         click.secho(dtoolcore.utils.get_config_value_from_file(
             DTOOL_LOOKUP_SERVER_URL_KEY, default=""
@@ -121,4 +114,19 @@ def url(dtool_lookup_server_url):
         click.secho(dtoolcore.utils.write_config_value_to_file(
             DTOOL_LOOKUP_SERVER_URL_KEY,
             dtool_lookup_server_url
+        ))
+
+
+@lookup_server.command()
+@click.argument("dtool_lookup_server_token", required=False)
+def token(dtool_lookup_server_token):
+    """Display / set / update token for dtool lookup server."""
+    if dtool_lookup_server_token is None:
+        click.secho(dtoolcore.utils.get_config_value_from_file(
+            DTOOL_LOOKUP_SERVER_TOKEN_KEY, default=""
+        ))
+    else:
+        click.secho(dtoolcore.utils.write_config_value_to_file(
+            DTOOL_LOOKUP_SERVER_TOKEN_KEY,
+            dtool_lookup_server_token
         ))
