@@ -52,8 +52,12 @@ def urljoin(*args):
     help="Specify the lookup server")
 def lookup(uuid, server):
     """Return the URIs associated with a UUID in the lookup server."""
-    url = urljoin(server, "lookup_datasets", uuid)
-    r = requests.get(url)
+    url = urljoin(server, "dataset", "lookup", uuid)
+    token = dtoolcore.utils.get_config_value("DTOOL_LOOKUP_SERVER_TOKEN")
+    headers = {
+        "Authorization": "Bearer {}".format(token),
+    }
+    r = requests.get(url, headers=headers)
     for uri in uris_from_lookup_response(r):
         click.secho(uri)
 
