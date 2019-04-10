@@ -95,7 +95,7 @@ def register(dataset_uri, server):
     help="Specify the lookup server")
 def search(query, mongosyntax, server):
     """Return the URIs associated with a UUID in the lookup server."""
-    url = urljoin(server, "search_for_datasets")
+    url = urljoin(server, "dataset", "search")
 
     if not mongosyntax:
         if query == "":
@@ -103,7 +103,11 @@ def search(query, mongosyntax, server):
         else:
             query = '{"$text": {"$search": "' + query + '"}}'
 
-    headers = {'content-type': 'application/json'}
+    token = dtoolcore.utils.get_config_value("DTOOL_LOOKUP_SERVER_TOKEN")
+    headers = {
+        "Authorization": "Bearer {}".format(token),
+        "Content-Type": "application/json"
+    }
     r = requests.get(url)
     r = requests.post(url, headers=headers, data=query)
 
