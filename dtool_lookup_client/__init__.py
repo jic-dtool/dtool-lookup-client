@@ -63,33 +63,6 @@ def lookup(uuid, server):
 
 
 @click.command()
-@dataset_uri_argument
-@click.option(
-    "-s",
-    "--server",
-    default="http://localhost:5000",
-    help="Specify the lookup server")
-def register(dataset_uri, server):
-    """Return the URIs associated with a UUID in the lookup server."""
-    url = urljoin(server, "register_dataset")
-    r = requests.get(url)
-
-    dataset = dtoolcore.DataSet.from_uri(dataset_uri)
-
-    dataset_info = dataset._admin_metadata
-    dataset_info["uri"] = dataset.uri
-
-    # Add the readme info.
-    readme_info = yaml.load(dataset.get_readme_content())
-    dataset_info["readme"] = readme_info
-
-    headers = {'content-type': 'application/json'}
-    data = json.dumps(dataset_info, default=json_serial)
-    r = requests.post(url, headers=headers, data=data)
-    click.secho(r.text)
-
-
-@click.command()
 @click.argument("query", default="")
 @click.option("-m", "--mongosyntax", default=False, is_flag=True)
 @click.option(
