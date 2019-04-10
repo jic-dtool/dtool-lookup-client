@@ -12,6 +12,7 @@ Added
 
 - ``dtool lookup`` command
 - ``dtool search`` command
+- ``dtool config lookup_server url`` command
 
 
 Changed

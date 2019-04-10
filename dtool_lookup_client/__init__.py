@@ -14,6 +14,12 @@ import pygments.formatters
 
 import dtoolcore
 import dtoolcore.utils
+import dtool_config.cli
+
+CONFIG_PATH = dtoolcore.utils.DEFAULT_CONFIG_PATH
+
+DTOOL_LOOKUP_SERVER_URL_KEY = "DTOOL_LOOKUP_SERVER_URL"
+DTOOL_LOOKUP_SERVER_TOKEN_KEY = "DTOOL_LOOKUP_SERVER_TOKEN"
 
 
 __version__ = "0.1.0"
@@ -95,3 +101,23 @@ def search(query, mongosyntax, server):
         pygments.formatters.TerminalFormatter())
 
     click.secho(colorful_json, nl=False)
+
+
+@dtool_config.cli.config.group()
+def lookup_server():
+    """Configure dtool lookup server connection."""
+
+
+@lookup_server.command()
+@click.argument("dtool_lookup_server_url", required=False)
+def url(dtool_lookup_server_url):
+    """Display / set / update the dtool lookup server URL."""
+    if dtool_lookup_server_url is None:
+        click.secho(dtoolcore.utils.get_config_value_from_file(
+            DTOOL_LOOKUP_SERVER_URL_KEY, default=""
+        ))
+    else:
+        click.secho(dtoolcore.utils.write_config_value_to_file(
+            DTOOL_LOOKUP_SERVER_URL_KEY,
+            dtool_lookup_server_url
+        ))
