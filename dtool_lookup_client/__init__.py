@@ -51,13 +51,9 @@ def urljoin(*args):
 
 @click.command()
 @click.argument("uuid")
-@click.option(
-    "-s",
-    "--server",
-    default="http://localhost:5000",
-    help="Specify the lookup server")
-def lookup(uuid, server):
+def lookup(uuid):
     """Return the URIs associated with a UUID in the lookup server."""
+    server = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_URL_KEY)
     url = urljoin(server, "dataset", "lookup", uuid)
     token = dtoolcore.utils.get_config_value("DTOOL_LOOKUP_SERVER_TOKEN")
     headers = {
@@ -71,13 +67,9 @@ def lookup(uuid, server):
 @click.command()
 @click.argument("query", default="")
 @click.option("-m", "--mongosyntax", default=False, is_flag=True)
-@click.option(
-    "-s",
-    "--server",
-    default="http://localhost:5000",
-    help="Specify the lookup server")
-def search(query, mongosyntax, server):
+def search(query, mongosyntax):
     """Return the URIs associated with a UUID in the lookup server."""
+    server = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_URL_KEY)
     url = urljoin(server, "dataset", "search")
 
     if not mongosyntax:
@@ -102,6 +94,11 @@ def search(query, mongosyntax, server):
 
     click.secho(colorful_json, nl=False)
 
+
+#############################################################################
+# Add click group to 'dtool config' with options for configuring connection
+# to the dtool lookup server.
+#############################################################################
 
 @dtool_config.cli.config.group()
 def lookup_server():
