@@ -20,7 +20,6 @@ setup(
         "dtoolcore>=3.9.0",
         "dtool_cli>=0.6.0",
         "dtool_config>=0.1.1",
-        "pyyaml",
         "pygments",
     ],
     entry_points={
