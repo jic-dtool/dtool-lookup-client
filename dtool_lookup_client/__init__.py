@@ -49,15 +49,20 @@ def urljoin(*args):
     return "/".join(parts)
 
 
+def _get_authorisation_header_value():
+    token = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_TOKEN_KEY)
+    return "Bearer {}".format(token)
+
+
+
 @click.command()
 @click.argument("uuid")
 def lookup(uuid):
     """Return the URIs associated with a UUID in the lookup server."""
     server = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_URL_KEY)
     url = urljoin(server, "dataset", "lookup", uuid)
-    token = dtoolcore.utils.get_config_value("DTOOL_LOOKUP_SERVER_TOKEN")
     headers = {
-        "Authorization": "Bearer {}".format(token),
+        "Authorization": _get_authorisation_header_value(),
     }
     r = requests.get(url, headers=headers)
     for uri in uris_from_lookup_response(r):
@@ -78,9 +83,8 @@ def search(query, mongosyntax):
         else:
             query = '{"$text": {"$search": "' + query + '"}}'
 
-    token = dtoolcore.utils.get_config_value("DTOOL_LOOKUP_SERVER_TOKEN")
     headers = {
-        "Authorization": "Bearer {}".format(token),
+        "Authorization": _get_authorisation_header_value(),
         "Content-Type": "application/json"
     }
     r = requests.get(url)
