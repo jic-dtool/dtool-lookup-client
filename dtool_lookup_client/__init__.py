@@ -45,6 +45,8 @@ def urljoin(*args):
 
 def _get_authorisation_header_value():
     token = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_TOKEN_KEY)
+    if token is None:
+        raise RuntimeError('Please provide {}'.format(DTOOL_LOOKUP_SERVER_TOKEN_KEY))
     return "Bearer {}".format(token)
 
 
@@ -53,6 +55,8 @@ def _get_authorisation_header_value():
 def lookup(uuid):
     """Return the URIs associated with a UUID in the lookup server."""
     server = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_URL_KEY)
+    if server is not None:
+        raise RuntimeError('Please provide {}'.format(DTOOL_LOOKUP_SERVER_URL_KEY))
     url = urljoin(server, "dataset", "lookup", uuid)
     headers = {
         "Authorization": _get_authorisation_header_value(),
