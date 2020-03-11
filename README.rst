@@ -15,6 +15,17 @@ To install the dtool_lookup_client package.
 This plugin depends on having a `dtool-lookup-server
 <https://github.com/jic-dtool/dtool-lookup-server>`_ to talk to.
 
+Configuration
+-------------
+
+The plugin needs to know the URL of the lookup server::
+
+    export DTOOL_LOOKUP_SERVER_URL=http://localhost:5000
+
+You also need to specify the access token::
+
+    export DTOOL_LOOKUP_SERVER_TOKEN=$(flask user token olssont)
+
 Looking up datasets by UUID
 ---------------------------
 
