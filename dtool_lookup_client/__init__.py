@@ -19,6 +19,7 @@ CONFIG_PATH = dtoolcore.utils.DEFAULT_CONFIG_PATH
 DTOOL_LOOKUP_SERVER_URL_KEY = "DTOOL_LOOKUP_SERVER_URL"
 DTOOL_LOOKUP_SERVER_TOKEN_KEY = "DTOOL_LOOKUP_SERVER_TOKEN"
 
+DTOOL_LOOKUP_CLIENT_IGNORE_SSL_KEY = "DTOOL_LOOKUP_CLIENT_IGNORE_SSL"
 
 __version__ = "0.1.0"
 
@@ -57,11 +58,13 @@ def lookup(uuid):
     server = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_URL_KEY)
     if server is not None:
         raise RuntimeError('Please provide {}'.format(DTOOL_LOOKUP_SERVER_URL_KEY))
+    verify = not dtoolcore.utils.get_config_value(
+        DTOOL_LOOKUP_CLIENT_IGNORE_SSL_KEY, default=False)
     url = urljoin(server, "dataset", "lookup", uuid)
     headers = {
         "Authorization": _get_authorisation_header_value(),
     }
-    r = requests.get(url, headers=headers)
+    r = requests.get(url, headers=headers, verify=verify)
     for uri in uris_from_lookup_response(r):
         click.secho(uri)
 
@@ -72,6 +75,8 @@ def lookup(uuid):
 def search(query, mongosyntax):
     """Return the URIs associated with a UUID in the lookup server."""
     server = dtoolcore.utils.get_config_value(DTOOL_LOOKUP_SERVER_URL_KEY)
+    verify = not dtoolcore.utils.get_config_value(
+        DTOOL_LOOKUP_CLIENT_IGNORE_SSL_KEY, default=False)
     url = urljoin(server, "dataset", "search")
 
     if not mongosyntax:
@@ -84,8 +89,8 @@ def search(query, mongosyntax):
         "Authorization": _get_authorisation_header_value(),
         "Content-Type": "application/json"
     }
-    r = requests.get(url)
-    r = requests.post(url, headers=headers, data=query)
+    r = requests.get(url, verify=verify)
+    r = requests.post(url, headers=headers, data=query, verify=verify)
 
     formatted_json = json.dumps(json.loads(r.text), indent=2)
     colorful_json = pygments.highlight(
