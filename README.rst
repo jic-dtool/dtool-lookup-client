@@ -26,6 +26,10 @@ You also need to specify the access token::
 
     export DTOOL_LOOKUP_SERVER_TOKEN=$(flask user token olssont)
 
+For testing purposes, it is possible to disable SSL certificates validation with::
+
+    export DTOOL_LOOKUP_CLIENT_IGNORE_SSL=true
+
 Looking up datasets by UUID
 ---------------------------
 

@@ -15,6 +15,7 @@ setup(
     author_email="tjelvar.olsson@jic.ac.uk",
     url=url,
     install_requires=[
+        "asgiref",
         "click",
         "requests",
         "dtoolcore>=3.9.0",
@@ -26,6 +27,7 @@ setup(
             "lookup=dtool_lookup_client:lookup",
             "register=dtool_lookup_client:register",
             "search=dtool_lookup_client:search",
+            "query=dtool_lookup_client:query",
         ],
     },
     download_url="{}/tarball/{}".format(url, version),
