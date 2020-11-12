@@ -20,12 +20,12 @@ setup(
         "requests",
         "dtoolcore>=3.9.0",
         "dtool_config>=0.1.1",
+        "dtool-lookup-api>=0.1",
         "pygments",
     ],
     entry_points={
         "dtool.cli": [
             "lookup=dtool_lookup_client:lookup",
-            "register=dtool_lookup_client:register",
             "search=dtool_lookup_client:search",
             "query=dtool_lookup_client:query",
         ],
