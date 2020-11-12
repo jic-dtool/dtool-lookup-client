@@ -12,13 +12,12 @@ import pygments.formatters
 import dtoolcore
 import dtoolcore.utils
 import dtool_config.cli
-
-from .config import DTOOL_LOOKUP_SERVER_URL_KEY, DTOOL_LOOKUP_SERVER_TOKEN_KEY
-# from .utils import lookup, search, query
-from . import utils
-
+import dtool_lookup_api
 
 __version__ = "0.1.0"
+
+DTOOL_LOOKUP_SERVER_URL_KEY = "DTOOL_LOOKUP_SERVER_URL"
+DTOOL_LOOKUP_SERVER_TOKEN_KEY = "DTOOL_LOOKUP_SERVER_TOKEN"
 
 
 def json_serial(obj):
@@ -45,7 +44,7 @@ def urljoin(*args):
 @click.argument("uuid")
 def lookup(uuid):
     """Print the URIs associated with a UUID in the lookup server."""
-    r = utils.lookup(uuid)
+    r = dtool_lookup_api.lookup(uuid)
     for uri in uris_from_lookup_response(r):
         click.secho(uri)
 
@@ -54,9 +53,8 @@ def lookup(uuid):
 @click.argument("keyword", default="")
 def search(keyword):
     """Print metadata matching keyword(s) on the lookup server."""
-    r = utils.search(keyword)
-
-    formatted_json = json.dumps(json.loads(r.text), indent=2)
+    r = dtool_lookup_api.search(keyword)
+    formatted_json = json.dumps(r, indent=2)
     colorful_json = pygments.highlight(
         formatted_json,
         pygments.lexers.JsonLexer(),
@@ -67,10 +65,9 @@ def search(keyword):
 
 @click.command()
 @click.argument("query", default="")
-@click.option("-m", "--mongosyntax", default=False, is_flag=True)
-def query(query, mongosyntax):
+def query(query):
     """Print metadata associated with a query in the lookup server."""
-    r = utils.query(query, mongosyntax)
+    r = dtool_lookup_api.query(query)
     formatted_json = json.dumps(r, indent=2)
     colorful_json = pygments.highlight(
         formatted_json,

@@ -14,8 +14,7 @@ def test_uris_from_lookup_response():
 
     from dtool_lookup_client import uris_from_lookup_response
 
-    response = ResponseMocker(
-        data=[
+    response = [
           {
             "type": "dataset",
             "uri": "file:///tmp/a_ds",
@@ -27,7 +26,6 @@ def test_uris_from_lookup_response():
             "uuid": "af6727bf-29c7-43dd-b42f-a5d7ede28337"
           }
         ]
-    )
 
     uris = uris_from_lookup_response(response)
 
