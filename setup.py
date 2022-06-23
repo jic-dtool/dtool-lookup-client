@@ -22,10 +22,10 @@ setup(
     use_scm_version={
         "root": '.',
         "relative_to": __file__,
-        "write_to": os.path.join("dtool_lookup_api", "version.py"),
+        "write_to": os.path.join("dtool_lookup_client", "version.py"),
         "local_scheme": local_scheme},
     setup_requires=[
-        'setuptools_scm>=3.5.0'
+        'setuptools_scm'
     ],
     url=url,
     install_requires=[
@@ -44,6 +44,5 @@ setup(
             "query=dtool_lookup_client:query",
         ],
     },
-    download_url="{}/tarball/{}".format(url, version),
     license="MIT"
 )
