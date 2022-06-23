@@ -2,9 +2,11 @@
 *.swp
 *.egg-info
 
+build
 dist
 .coverage
 .eggs
+.idea
 .tox
 .cache
 .pytest_cache
