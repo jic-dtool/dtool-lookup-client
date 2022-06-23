@@ -2,7 +2,6 @@ from setuptools import setup
 
 url = "https://github.com/IMTEK-Simulation/dtool-lookup-api"
 readme = open('README.rst').read()
-version = get_version(root='.', relative_to=__file__)
 
 
 def local_scheme(version):
@@ -14,7 +13,6 @@ def local_scheme(version):
 setup(
     name="dtool_lookup_client",
     packages=["dtool_lookup_client"],
-    version=version,
     description="Dtool plugin for interacting with dtool lookup server",
     long_description=readme,
     include_package_data=True,
