@@ -1,3 +1,4 @@
+import os
 from setuptools import setup
 
 url = "https://github.com/IMTEK-Simulation/dtool-lookup-api"
