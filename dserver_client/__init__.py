@@ -13,7 +13,7 @@ import pygments.formatters
 import dtoolcore
 import dtoolcore.utils
 import dtool_config.cli
-import dtool_lookup_api
+import dserver_api
 
 
 logger = logging.getLogger(__name__)
@@ -69,7 +69,7 @@ def urljoin(*args):
 @click.argument("uuid")
 def lookup(uuid):
     """Print the URIs associated with a UUID in the lookup server."""
-    r = dtool_lookup_api.lookup(uuid)
+    r = dserver_api.lookup(uuid)
     for uri in uris_from_lookup_response(r):
         click.secho(uri)
 
@@ -78,7 +78,7 @@ def lookup(uuid):
 @click.argument("keyword", default="")
 def search(keyword):
     """Print metadata matching keyword(s) on the lookup server."""
-    r = dtool_lookup_api.search(keyword)
+    r = dserver_api.search(keyword)
     formatted_json = json.dumps(r, indent=2)
     colorful_json = pygments.highlight(
         formatted_json,
@@ -92,7 +92,7 @@ def search(keyword):
 @click.argument("query", default="")
 def query(query):
     """Print metadata associated with a query in the lookup server."""
-    r = dtool_lookup_api.query(query)
+    r = dserver_api.query(query)
     formatted_json = json.dumps(r, indent=2)
     colorful_json = pygments.highlight(
         formatted_json,

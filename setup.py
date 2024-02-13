@@ -35,7 +35,7 @@ setup(
         "dtoolcore>=3.9.0",
         "dtool-cli>=0.7.1",
         "dtool_config>=0.1.1",
-        "dtool-lookup-api>=0.5.0",
+        "dserver-api>=0.5.0",
         "pygments",
     ],
     entry_points={
