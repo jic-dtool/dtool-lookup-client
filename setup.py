@@ -1,7 +1,7 @@
 import os
 from setuptools import setup
 
-url = "https://github.com/IMTEK-Simulation/dtool-lookup-api"
+url = "https://github.com/livMatS/dserver-client"
 readme = open('README.rst').read()
 
 
@@ -12,9 +12,9 @@ def local_scheme(version):
 
 
 setup(
-    name="dtool_lookup_client",
-    packages=["dtool_lookup_client"],
-    description="Dtool plugin for interacting with dtool lookup server",
+    name="dserver_client",
+    packages=["dserver_client"],
+    description="Dtool plugin for interacting with dserver",
     long_description=readme,
     include_package_data=True,
     author="Tjelvar Olsson",
@@ -22,7 +22,7 @@ setup(
     use_scm_version={
         "root": '.',
         "relative_to": __file__,
-        "write_to": os.path.join("dtool_lookup_client", "version.py"),
+        "write_to": os.path.join("dserver_client", "version.py"),
         "local_scheme": local_scheme},
     setup_requires=[
         'setuptools_scm'
@@ -40,9 +40,9 @@ setup(
     ],
     entry_points={
         "dtool.cli": [
-            "lookup=dtool_lookup_client:lookup",
-            "search=dtool_lookup_client:search",
-            "query=dtool_lookup_client:query",
+            "lookup=dserver_client:lookup",
+            "search=dserver_client:search",
+            "query=dserver_client:query",
         ],
     },
     license="MIT"
