@@ -1,34 +1,34 @@
 README
 ======
 
-Dtool plugin for interacting with dtool lookup server
+tool plugin for interacting with dserver
 
 Installation
 ------------
 
-To install the dtool_lookup_client package.
+To install the dserver_client package.
 
 .. code-block:: bash
 
-    pip install dtool_lookup_client
+    pip install dserver_client
 
-This plugin depends on having a `dtool-lookup-server
-<https://github.com/jic-dtool/dtool-lookup-server>`_ to talk to.
+This plugin depends on having a `dserver
+<https://github.com/jic-dtool/dserver>`_ to talk to.
 
 Configuration
 -------------
 
 The plugin needs to know the URL of the lookup server::
 
-    export DTOOL_LOOKUP_SERVER_URL=http://localhost:5000
+    export DSERVER_URL=http://localhost:5000
 
 You also need to specify the access token::
 
-    export DTOOL_LOOKUP_SERVER_TOKEN=$(flask user token olssont)
+    export DSERVER_TOKEN=$(flask user token olssont)
 
 For testing purposes, it is possible to disable SSL certificates validation with::
 
-    export DTOOL_LOOKUP_CLIENT_IGNORE_SSL=true
+    export DSERVER_CLIENT_IGNORE_SSL=true
 
 Looking up datasets by UUID
 ---------------------------
