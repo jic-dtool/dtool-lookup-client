@@ -45,10 +45,10 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u"dserver_client"
+project = u"dtool-lookup-client"
 copyright = u"2018, Tjelvar Olsson"
 author = u"Tjelvar Olsson"
-repo_name = u"dserver_client"
+repo_name = u"dtool_lookup_client"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

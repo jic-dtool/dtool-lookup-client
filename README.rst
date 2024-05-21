@@ -6,14 +6,14 @@ tool plugin for interacting with dserver
 Installation
 ------------
 
-To install the dserver_client package.
+To install the dtool-lookup-client package.
 
 .. code-block:: bash
 
-    pip install dserver_client
+    pip install dtool-lookup-client
 
 This plugin depends on having a `dserver
-<https://github.com/jic-dtool/dserver>`_ to talk to.
+<https://github.com/jic-dtool/dtool-lookup-server>`_ to talk to.
 
 Configuration
 -------------

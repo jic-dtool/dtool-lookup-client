@@ -12,7 +12,7 @@ class ResponseMocker(object):
 
 def test_uris_from_lookup_response():
 
-    from dserver_client import uris_from_lookup_response
+    from dtool_lookup_client import uris_from_lookup_response
 
     response = [
           {
@@ -37,7 +37,7 @@ def test_uris_from_lookup_response():
 
 
 def test_urljoin():
-    from dserver_client import urljoin
+    from dtool_lookup_client import urljoin
 
     assert urljoin(
         "http://localhost:5000",

@@ -7,7 +7,7 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 [Unreleased]
 ------------
 
-- rebranded everything from ``dtool_lookup_client`` to ``dserver_client``
+- rebranded some bits from ``dtool_lookup_...`` to ``dserver_...``
 
 Added
 ^^^^^
