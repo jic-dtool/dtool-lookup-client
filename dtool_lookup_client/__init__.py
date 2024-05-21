@@ -69,35 +69,129 @@ def urljoin(*args):
 @click.argument("uuid")
 def lookup(uuid):
     """Print the URIs associated with a UUID in the lookup server."""
-    r = dtool_lookup_api.lookup(uuid)
+    r = dtool_lookup_api.get_datasets_by_uuid(uuid)
     for uri in uris_from_lookup_response(r):
         click.secho(uri)
 
 
 @click.command()
-@click.argument("keyword", default="")
-def search(keyword):
-    """Print metadata matching keyword(s) on the lookup server."""
-    r = dtool_lookup_api.search(keyword)
+@click.argument("free-text", default="")
+@click.option("--creator-username", multiple=True,
+              help=("Filter results to only return datasets created by this user."
+                    "Provide multiple times to filter by multiple users (logical OR)."))
+@click.option("--base-uri", multiple=True,
+              help=("Filter results to only return datasets at specified base URI."
+                    "Provide multiple times to filter by multiple base URIs (logical OR)."))
+@click.option("--uuid", multiple=True,
+              help=("Filter results to only return datasets of specified UUID."
+                    "Provide multiple times to filter by multiple UUIDs (logical OR."))
+@click.option("--tag", multiple=True,
+              help=("Filter results to only return datasets matching this tag."
+                    "Provide multiple times match all tags (logical AND.)"))
+@click.option("--page-size", "-n", default=10,
+              help="Retrieve that many datasets per page.")
+@click.option("--page", "-p", default=1,
+              help="Show this page.")
+@click.option("--pagination-info", is_flag=True,
+              help="Print pagination information to stderr.")
+def search(free_text, creator_username, base_uri, uuid, tag, page_size, page,
+           pagination_info):
+    """Free-text search for datasets registered on dserver."""
+    # click passes empty tuples if no value specified
+    if len(creator_username) == 0:
+        creator_username = None
+    if len(base_uri) == 0:
+        base_uri = None
+    if len(uuid) == 0:
+        uuid = None
+    if len(tag) == 0:
+        tag = None
+
+    pagination = {}
+    r = dtool_lookup_api.get_datasets(
+        free_text=free_text,
+        creator_usernames=creator_username,
+        base_uris=base_uri,
+        uuids=uuid,
+        tags=tag,
+        page_size=page_size,
+        page_number=page,
+        pagination=pagination
+    )
     formatted_json = json.dumps(r, indent=2)
     colorful_json = pygments.highlight(
         formatted_json,
         pygments.lexers.JsonLexer(),
         pygments.formatters.TerminalFormatter())
+
+    if pagination_info:
+        formatted_pagination_json = json.dumps({"pagination": pagination}, indent=2)
+        colorful_pagination_json = pygments.highlight(
+            formatted_pagination_json,
+            pygments.lexers.JsonLexer(),
+            pygments.formatters.TerminalFormatter())
+        click.secho(colorful_pagination_json, nl=False, err=True)
 
     click.secho(colorful_json, nl=False)
 
 
 @click.command()
 @click.argument("query", default="")
-def query(query):
-    """Print metadata associated with a query in the lookup server."""
-    r = dtool_lookup_api.query(query)
+@click.option("--creator-username", multiple=True,
+              help=("Filter results to only return datasets created by this user."
+                    "Provide multiple times to filter by multiple users (logical OR)."))
+@click.option("--base-uri", multiple=True,
+              help=("Filter results to only return datasets at specified base URI."
+                    "Provide multiple times to filter by multiple base URIs (logical OR)."))
+@click.option("--uuid", multiple=True,
+              help=("Filter results to only return datasets of specified UUID."
+                    "Provide multiple times to filter by multiple UUIDs (logical OR."))
+@click.option("--tag", multiple=True,
+              help=("Filter results to only return datasets matching this tag."
+                    "Provide multiple times match all tags (logical AND.)"))
+@click.option("--page-size", "-n", default=10,
+              help="Retrieve that many datasets per page.")
+@click.option("--page", "-p", default=1,
+              help="Show this page.")
+@click.option("--pagination-info", is_flag=True,
+              help="Print pagination information to stderr.")
+def query(query, creator_username, base_uri, uuid, tag, page_size, page,
+           pagination_info):
+    """MongoDB No-SQL language query for datasets registered on dserver."""
+    if len(creator_username) == 0:
+        creator_username = None
+    if len(base_uri) == 0:
+        base_uri = None
+    if len(uuid) == 0:
+        uuid = None
+    if len(tag) == 0:
+        tag = None
+
+    pagination = {}
+    r = dtool_lookup_api.query(
+        query=query,
+        creator_usernames=creator_username,
+        base_uris=base_uri,
+        uuids=uuid,
+        tags=tag,
+        page_size=page_size,
+        page_number=page,
+        pagination=pagination
+    )
+
     formatted_json = json.dumps(r, indent=2)
     colorful_json = pygments.highlight(
         formatted_json,
         pygments.lexers.JsonLexer(),
         pygments.formatters.TerminalFormatter())
+
+    if pagination_info:
+        formatted_pagination_json = json.dumps({"pagination": pagination}, indent=2)
+        colorful_pagination_json = pygments.highlight(
+            formatted_pagination_json,
+            pygments.lexers.JsonLexer(),
+            pygments.formatters.TerminalFormatter())
+        click.secho(colorful_pagination_json, nl=False, err=True)
 
     click.secho(colorful_json, nl=False)
 
