@@ -11,3 +11,6 @@ dist
 .cache
 .pytest_cache
 env
+
+dtool_lookup_client/version.py
+venv/
