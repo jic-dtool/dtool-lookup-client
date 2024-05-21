@@ -35,7 +35,6 @@ docs = [
 ]
 
 [project.entry-points."dtool.cli"]
-"MongoSearch" = "dserver_search_plugin_mongo.utils_search:MongoSearch"
 "lookup"= "dtool_lookup_client:lookup"
 "search" = "dtool_lookup_client:search"
 "query" = "dtool_lookup_client:query"
