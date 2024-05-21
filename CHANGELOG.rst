@@ -7,8 +7,6 @@ This change log uses principles from `keep a changelog <http://keepachangelog.co
 [Unreleased]
 ------------
 
-- rebranded some bits from ``dtool_lookup_...`` to ``dserver_...``
-
 Added
 ^^^^^
 
@@ -21,6 +19,7 @@ Added
 Changed
 ^^^^^^^
 
+- rebranded some bits from ``dtool_lookup_...`` to ``dserver_...``
 
 Deprecated
 ^^^^^^^^^^

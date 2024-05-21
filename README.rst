@@ -1,7 +1,7 @@
 README
 ======
 
-tool plugin for interacting with dserver
+dtool plugin for interacting with dserver
 
 Installation
 ------------
@@ -14,6 +14,19 @@ To install the dtool-lookup-client package.
 
 This plugin depends on having a `dserver
 <https://github.com/jic-dtool/dtool-lookup-server>`_ to talk to.
+
+It exposes core functionality of Python API `dtool-lookup-api <https://github.com/livMatS/dtool-lookup-api>`_ on the command line.
+
+Quick start
+-----------
+
+Inspect the three core commands with::
+
+    dtool lookup -h
+    dtool search -h
+    dtool query -h
+
+on the command line.
 
 Configuration
 -------------
@@ -28,7 +41,7 @@ You also need to specify the access token::
 
 For testing purposes, it is possible to disable SSL certificates validation with::
 
-    export DSERVER_CLIENT_IGNORE_SSL=true
+    export DSERVER_VERIFY_SSL=false
 
 Looking up datasets by UUID
 ---------------------------
@@ -48,6 +61,11 @@ Full text search for the word "EMS"::
 
     dtool search EMS
 
+Direct MongoDB No-SQL queries
+-----------------------------
+
+This requires a ``dserver`` instance with ``dserver-direct-mongo-plugin``.
+
 To list all datasets created by user ``olssont`` using the mongo query language::
 
-    dtool search -m '{"creator_username": "olssont"}'
+    dtool query '{"creator_username": "olssont"}'
