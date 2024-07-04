@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=42", "setuptools_scm[toml]>=6.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dtool-lookup-client"
+description = "Dtool plugin for interacting with dserver on the command line."
+readme = "README.rst"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Tjelvar Olsson", email = "tjelvar.olsson@gmail.com"},
+    {name = "Johannes L. Hörmann", email = "johannes.laurin@gmail.com"},
+]
+dynamic = ["version"]
+dependencies = [
+        "asgiref",
+        "click",
+        "requests",
+        "dtoolcore>=3.18.3",
+        "dtool-cli>=0.7.1",
+        "dtool_config>=0.1.1",
+        "dtool-lookup-api>=0.8.0",
+        "pygments",
+    ]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov"
+]
+docs = [
+    "sphinx",
+    "sphinx_rtd_theme",
+    "sphinxcontrib-spelling"
+]
+
+[project.entry-points."dtool.cli"]
+"lookup"= "dtool_lookup_client:lookup"
+"search" = "dtool_lookup_client:search"
+"query" = "dtool_lookup_client:query"
+
+[project.urls]
+Documentation = "https://github.com/jic-dtool/dtool-lookup-client/blob/main/README.rst"
+Repository = "https://github.com/jic-dtool/dtool-lookup-client"
+Changelog = "https://github.com/jic-dtool/dtool-lookup-client/blob/main/CHANGELOG.rst"
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "no-local-version"
+write_to = "dtool_lookup_client/version.py"
+
+[tool.setuptools]
+packages = ["dtool_lookup_client"]
