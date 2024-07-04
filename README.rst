@@ -1,7 +1,7 @@
 README
 ======
 
-.. |dtool| image:: https://github.com/jic-dtool/dtool-lookup-client/blob/master/icons/22x22/dtool_logo.png?raw=True
+.. |dtool| image:: https://github.com/jic-dtool/dtool-lookup-client/blob/main/icons/22x22/dtool_logo.png?raw=True
     :height: 20px
     :target: https://github.com/jic-dtool/dtoolcore
 
@@ -9,7 +9,7 @@ README
     :target: https://pypi.org/project/dtool-lookup-client/
     :alt: PyPi package
 
-.. |test| image:: https://img.shields.io/github/actions/workflow/status/jic-dtool/dtool-lookup-client/test.yml?branch=master&label=tests
+.. |test| image:: https://img.shields.io/github/actions/workflow/status/jic-dtool/dtool-lookup-client/test.yml?branch=main&label=tests
     :target: https://github.com/jic-dtool/dtool-lookup-client/actions/workflows/test.yml
 
 |dtool| |pypi| |test|
