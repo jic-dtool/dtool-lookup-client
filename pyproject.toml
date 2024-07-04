@@ -16,10 +16,10 @@ dependencies = [
         "asgiref",
         "click",
         "requests",
-        "dtoolcore>=3.9.0",
+        "dtoolcore>=3.18.3",
         "dtool-cli>=0.7.1",
         "dtool_config>=0.1.1",
-        "dtool-lookup-api>=0.5.0",
+        "dtool-lookup-api>=0.8.0",
         "pygments",
     ]
 
@@ -40,9 +40,9 @@ docs = [
 "query" = "dtool_lookup_client:query"
 
 [project.urls]
-Documentation = "https://dtool-lookup-client.readthedocs.io"
-Repository = "https://github.com/livMatS/dtool-lookup-client"
-Changelog = "https://github.com/livMatS/dtool-lookup-client/blob/main/CHANGELOG.rst"
+Documentation = "https://github.com/jic-dtool/dtool-lookup-client/blob/main/README.rst"
+Repository = "https://github.com/jic-dtool/dtool-lookup-client"
+Changelog = "https://github.com/jic-dtool/dtool-lookup-client/blob/main/CHANGELOG.rst"
 
 [tool.setuptools_scm]
 version_scheme = "guess-next-dev"
