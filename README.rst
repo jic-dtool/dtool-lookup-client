@@ -26,7 +26,7 @@ To install the dtool-lookup-client package.
     pip install dtool-lookup-client
 
 This plugin depends on having a `dserver
-<https://github.com/jic-dtool/dtool-lookup-server>`_ to talk to.
+<https://github.com/jic-dtool/dservercore>`_ to talk to.
 
 It exposes core functionality of Python API `dtool-lookup-api <https://github.com/livMatS/dtool-lookup-api>`_ on the command line.
 
