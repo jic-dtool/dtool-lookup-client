@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -51,10 +50,10 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u"dtool-lookup-client"
-copyright = u"2018, Tjelvar Olsson"
-author = u"Tjelvar Olsson"
-repo_name = u"dtool_lookup_client"
+project = "dtool-lookup-client"
+copyright = "2018, Tjelvar Olsson"
+author = "Tjelvar Olsson"
+repo_name = "dtool_lookup_client"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -141,7 +140,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, '{}.tex'.format(repo_name),
-     u'{} Documentation'.format(repo_name),
+     '{} Documentation'.format(repo_name),
      author, 'manual'),
 ]
 
@@ -151,7 +150,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, repo_name, u'{} Documentation'.format(repo_name),
+    (master_doc, repo_name, '{} Documentation'.format(repo_name),
      [author], 1)
 ]
 
@@ -162,8 +161,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, repo_name, u'{} Documentation'.format(repo_name),
-     author, repo_name, u'Dtool plugin for interacting with dserver',
+    (master_doc, repo_name, '{} Documentation'.format(repo_name),
+     author, repo_name, 'Dtool plugin for interacting with dserver',
      'Miscellaneous'),
 ]
 
