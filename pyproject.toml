@@ -19,7 +19,7 @@ dependencies = [
         "click",
         "requests",
         "dtoolcore>=3.18.3",
-        "dtool-cli>=0.7.1",
+        "dtool-cli>=0.7.2",
         "dtool_config>=0.1.1",
         "dtool-lookup-api>=0.8.0",
         "pygments",
