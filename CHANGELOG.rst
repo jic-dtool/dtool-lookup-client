@@ -14,6 +14,9 @@ Changed
   derived from git tags
 - Require ``dtool-cli>=0.7.2``; earlier releases import ``pkg_resources``,
   which is not available without setuptools
+- The publish workflow now runs only for version tags: it runs the test
+  suite, checks that the built version matches the tag and publishes to
+  PyPI. Development builds are no longer uploaded to TestPyPI
 
 
 Removed
