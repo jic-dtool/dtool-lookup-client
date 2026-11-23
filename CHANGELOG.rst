@@ -4,6 +4,20 @@ CHANGELOG
 This project uses `semantic versioning <http://semver.org/>`_.
 This change log uses principles from `keep a changelog <http://keepachangelog.com/>`_.
 
+[Unreleased]
+------------
+
+Changed
+^^^^^^^
+
+- Build system switched to hatchling with hatch-vcs; the version is now
+  derived from git tags
+
+Removed
+^^^^^^^
+
+- Support for Python < 3.10
+
 [0.2.0]
 -------
 

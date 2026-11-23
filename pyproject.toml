@@ -1,16 +1,18 @@
 [build-system]
-requires = ["setuptools>=42", "setuptools_scm[toml]>=6.3"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling>=1.27", "hatch-vcs"]
+build-backend = "hatchling.build"
 
 [project]
 name = "dtool-lookup-client"
 description = "Dtool plugin for interacting with dserver on the command line."
 readme = "README.rst"
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE.rst"]
 authors = [
     {name = "Tjelvar Olsson", email = "tjelvar.olsson@gmail.com"},
     {name = "Johannes L. Hörmann", email = "johannes.laurin@gmail.com"},
 ]
+requires-python = ">=3.10"
 dynamic = ["version"]
 dependencies = [
         "asgiref",
@@ -44,10 +46,14 @@ Documentation = "https://github.com/jic-dtool/dtool-lookup-client/blob/main/READ
 Repository = "https://github.com/jic-dtool/dtool-lookup-client"
 Changelog = "https://github.com/jic-dtool/dtool-lookup-client/blob/main/CHANGELOG.rst"
 
-[tool.setuptools_scm]
-version_scheme = "guess-next-dev"
-local_scheme = "no-local-version"
-write_to = "dtool_lookup_client/version.py"
+[tool.hatch.version]
+source = "vcs"
 
-[tool.setuptools]
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "dtool_lookup_client/version.py"
+
+[tool.hatch.build.targets.wheel]
 packages = ["dtool_lookup_client"]
