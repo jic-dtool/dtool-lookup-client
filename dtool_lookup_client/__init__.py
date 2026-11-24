@@ -5,6 +5,7 @@ from datetime import date, datetime
 import click
 import json
 import logging
+from importlib.metadata import version, PackageNotFoundError
 
 import pygments
 import pygments.lexers
@@ -18,14 +19,6 @@ import dtool_lookup_api
 
 logger = logging.getLogger(__name__)
 
-
-# workaround for diverging python versions:
-try:
-    from importlib.metadata import version, PackageNotFoundError
-    logger.debug("imported version, PackageNotFoundError from importlib.metadata")
-except ModuleNotFoundError:
-    from importlib_metadata import version, PackageNotFoundError
-    logger.debug("imported version, PackageNotFoundError from importlib_metadata")
 
 # first, try to determine dynamic version at runtime
 try:

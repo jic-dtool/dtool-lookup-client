@@ -1,7 +1,7 @@
 """Test the 'dtool lookup' command."""
 
 
-class ResponseMocker(object):
+class ResponseMocker:
 
     def __init__(self, data):
         self.data = data
